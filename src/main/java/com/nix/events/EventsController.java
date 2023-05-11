@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"${settings.cors.origin.source}"})
+//@CrossOrigin(origins = "http://localhost:3000")
 public class EventsController {
 
     private EventRepository eventRepository;
