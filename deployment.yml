@@ -30,9 +30,9 @@ spec:
             - name: DB_HOST
               value: "postgresql"
             - name: CORS_ORIGIN_HOST
-              value: "event-fe-service"
+              value: "localhost"
             - name: CORS_ORIGIN_PORT
-              value: "80"
+              value: "3000"
           resources:
             requests:
               memory: "300Mi"
