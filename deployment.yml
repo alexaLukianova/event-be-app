@@ -1,0 +1,45 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: event-be-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: event-be
+  template:
+    metadata:
+      labels:
+        app: event-be
+    spec:
+      containers:
+        - name: event-be
+          image: lukianovaoleksandra/event_be:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: event-be-config
+            - secretRef:
+                name: event-be-secret
+          resources:
+            requests:
+              memory: "300Mi"
+              cpu: "500m"
+            limits:
+              memory: "400Mi"
+              cpu: "800m"
+          livenessProbe:
+            httpGet:
+              path: "/actuator/health"
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          startupProbe:
+            httpGet:
+              path: "/actuator/health"
+              port: 8080
+            failureThreshold: 60
+            periodSeconds: 5
+      restartPolicy: Always
