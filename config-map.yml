@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: event-be-config
+data:
+  DB_DATABASE: "events"
+  DB_PORT: "5432"
+  DB_HOST: "postgresql"
+  CORS_ORIGIN_HOST: "localhost"
+  CORS_ORIGIN_PORT: "3000"

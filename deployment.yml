@@ -18,21 +18,11 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
-          env:
-            - name: DB_USERNAME
-              value: "lukianova"
-            - name: DB_PASSWORD
-              value: "admin123"
-            - name: DB_DATABASE
-              value: "events"
-            - name: DB_PORT
-              value: "5432"
-            - name: DB_HOST
-              value: "postgresql"
-            - name: CORS_ORIGIN_HOST
-              value: "localhost"
-            - name: CORS_ORIGIN_PORT
-              value: "3000"
+          envFrom:
+            - configMapRef:
+                name: event-be-config
+            - secretRef:
+                name: event-be-secret
           resources:
             requests:
               memory: "300Mi"
